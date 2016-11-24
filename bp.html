@@ -22,7 +22,7 @@ d3.json("Budapest3.json", function(error, Budapest3) {
 
   svg.append("path")
       .datum(topojson.feature(Budapest3, Budapest3.objects.collection))
-      .attr("d", d3.geo.path().projection(d3.geo.mercator()));
+      .attr("d", d3.geo.path().projection(d3.geo.albers()));
 });
 
 /* JavaScript goes here. */
