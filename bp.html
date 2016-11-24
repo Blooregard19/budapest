@@ -17,10 +17,10 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var bp = d3.json("Budapest2.json", function(error, bp) {
+d3.json("uk.json", function(error, uk) {
 	if (error) return console.error(error);
 	svg.append("path")
-      .datum(topojson.feature(bp, bp.objects.collection))
+      .datum(topojson.feature(uk, uk.objects.subunits))
       .attr("d", d3.geo.path().projection(d3.geo.albers()));
 	});
 
