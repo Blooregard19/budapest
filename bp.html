@@ -18,8 +18,6 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 d3.json("Budapest5.json", function(error, Budapest5) {
-  if (error) return console.error(error);
-
   svg.append("path")
       .datum(topojson.feature(Budapest5, Budapest5.objects.Budapest3))
       .attr("d", d3.geo.path().projection(d3.geo.mercator()));
