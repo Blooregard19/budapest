@@ -23,7 +23,7 @@ var path = d3.geo.path();
 d3.json("uk.json", function(error, Budapest5) {
   if (error) return console.error(error);
   svg.selectAll("path")
-      .data(Budapest5.subunits)
+      .data(Budapest5.objects.subunits)
       .enter()
       .append("path")
       .attr("d", path);
