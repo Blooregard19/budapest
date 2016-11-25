@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<style>
+
+/* CSS goes here. */
+
+</style>
+<body>
+<script src="d3.v3.min.js" charset="utf-8"></script>
+<script src="topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 1160;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geo.path();
+
+d3.json("uk.json", function(error, uk) {
+  if (error) return console.error(error);
+  svg.selectAll("path")
+      .data(uk.objects.subunits)
+      .enter()
+      .append("path")
+      .attr("d", path);
+});
+
+/* JavaScript goes here. */
+
+</script>
+
