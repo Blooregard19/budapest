@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <meta charset="utf-8">
 <style>
 
@@ -20,10 +20,10 @@ var svg = d3.select("body").append("svg")
 
 var path = d3.geo.path();
 
-d3.json("uk.json", function(error, Budapest5) {
+d3.json("uk.json", function(error, uk) {
   if (error) return console.error(error);
   svg.selectAll("path")
-      .data(Budapest5.objects.subunits)
+      .data(uk.objects.subunits)
       .enter()
       .append("path")
       .attr("d", path);
@@ -33,5 +33,3 @@ d3.json("uk.json", function(error, Budapest5) {
 
 </script>
 
-</body>
-</html>
