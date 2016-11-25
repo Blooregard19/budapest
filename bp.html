@@ -19,9 +19,7 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 var projection = d3.geo.albers()
-    .center([21, 60])
-    .scale(1500)
-    .translate([width / 2, height / 2]);
+    .center([21, 60]);
 
 var path = d3.geo.path().projection(projection);
 
