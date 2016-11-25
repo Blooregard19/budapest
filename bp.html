@@ -20,7 +20,7 @@ var svg = d3.select("body").append("svg")
 d3.json("Budapest5.json", function(error, Budapest5) {
   svg.selectAll("path")
       .data(Budapest5.objects.Budapest3)
-      .enter
+      .enter()
       .append("path")
       .attr("d", d3.geo.path);
 });
