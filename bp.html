@@ -20,10 +20,10 @@ var svg = d3.select("body").append("svg")
 
 var path = d3.geo.path().projection(null);
 
-d3.json("Budapest5.json", function(error, Budapest5) {
+d3.json("Budapestteszt.json", function(error, bp) {
   if (error) return console.error(error);
   svg.selectAll("path")
-    .data(topojson.feature(Budapest5, Budapest5.objects.Budapest3).features)
+    .data(topojson.feature(bp, bp.objects.Budapestteszt).features)
     .enter()
     .append("path")
     .attr("d", path);
