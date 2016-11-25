@@ -27,10 +27,11 @@ var path = d3.geo.path().projection(projection);
 
 d3.json("Budapestteszt.json", function(error, bp) {
   if (error) return console.error(error);
-  svg.selectAll("path")
+  svg.selectAll(".kerulet")
     .data(topojson.feature(bp, bp.objects.Budapestteszt).features)
     .enter()
     .append("path")
+    .attr("class", function(d) { return "kerulet " + d.region})
     .attr("d", path);
 });
 
