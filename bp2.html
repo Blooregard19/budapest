@@ -24,7 +24,7 @@ d3.json("uk.json", function(error, uk) {
   if (error) return console.error(error);
   svg.selectAll("path")
     .data(topojson.feature(uk, uk.objects.subunits))
-    .enter.
+    .enter()
     .append("path")
     .attr("d", d3.geo.path().projection(d3.geo.mercator()));
 });
