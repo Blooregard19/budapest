@@ -39,7 +39,7 @@ d3.json("Budapestteszt.json", function(error, bp) {
     .on("mouseout", function() {
         d3.select(this)
            .transition()
-           .duration()
+           .duration(250)
            .attr("fill", "black");
   });
 });
