@@ -18,15 +18,15 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var path = d3.geo.path();
+var path = d3.geo.path().projection(null);
 
-d3.json("uk.json", function(error, uk) {
+d3.json("Budapest5.json", function(error, Budapest5) {
   if (error) return console.error(error);
   svg.selectAll("path")
-      .data(uk.objects.subunits)
-      .enter()
-      .append("path")
-      .attr("d", path);
+    .data(topojson.feature(Budapest5, Budapest5.objects.Budapest3).features)
+    .enter()
+    .append("path")
+    .attr("d", path);
 });
 
 /* JavaScript goes here. */
