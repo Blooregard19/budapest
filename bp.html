@@ -33,12 +33,14 @@ d3.json("Budapestteszt.json", function(error, bp) {
     .attr("class", function(d) { return "kerulet " + d.properties.region})
     .attr("d", path)
     .on("mouseover", function() {
-    d3.select(this)
+        d3.select(this)
           .attr("fill", "orange");
   })
-     .on("mouseout", function() {
-          d3.select(this)
-          .attr("fill", "black");
+    .on("mouseout", function() {
+        d3.select(this)
+           .transition()
+           .duration()
+           .attr("fill", "black");
   });
 });
 
