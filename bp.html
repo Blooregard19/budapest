@@ -31,7 +31,7 @@ d3.json("Budapestteszt.json", function(error, bp) {
     .data(topojson.feature(bp, bp.objects.Budapestteszt).features)
     .enter()
     .append("path")
-    .attr("class", function(d) { return "kerulet " + d.region})
+    .attr("class", function(d) { return "kerulet " + d.properties.region})
     .attr("d", path);
 });
 
