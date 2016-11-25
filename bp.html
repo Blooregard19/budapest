@@ -11,8 +11,8 @@
 <script src="topojson.v1.min.js"></script>
 <script>
 
-var width = 960,
-    height = 1160;
+var width = 1160,
+    height = 960;
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -20,7 +20,7 @@ var svg = d3.select("body").append("svg")
 
 var projection = d3.geo.mercator()
     .center([21, 60])
-    .scale(15000)
+    .scale(45000)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path().projection(projection);
