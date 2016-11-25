@@ -18,7 +18,10 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var path = d3.geo.path().projection(d3.geo.mercator());
+var projection = d3.geo.albers()
+    .center([0, 55]);
+
+var path = d3.geo.path().projection(projection);
 
 d3.json("uk.json", function(error, uk) {
   if (error) return console.error(error);
