@@ -22,9 +22,11 @@ var path = d3.geo.path().projection(d3.geo.mercator());
 
 d3.json("uk.json", function(error, uk) {
   if (error) return console.error(error);
-  svg.append("path")
-      .datum(topojson.feature(uk, uk.objects.subunits))
-      .attr("d", d3.geo.path().projection(d3.geo.mercator()));
+  svg.selectAll("path")
+    .data(topojson.feature(uk, uk.objects.subunits))
+    .enter.
+    .append("path")
+    .attr("d", d3.geo.path().projection(d3.geo.mercator()));
 });
 
 /* JavaScript goes here. */
