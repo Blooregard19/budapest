@@ -34,7 +34,8 @@ d3.json("Budapestteszt2.json", function(error, bp) {
     .attr("d", path)
     .on("mouseover", function() {
         d3.select(this)
-          .attr("fill", "green");
+            .attr("fill", function(d) {return d.properties.szin});
+             /*.attr("fill", "green"); */
   })
     .on("mouseout", function() {
         d3.select(this)
