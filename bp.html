@@ -18,13 +18,13 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
 
 var projection = d3.geo.mercator()
-    .center([21.1, 60.2])
+    .center([19.1, 47.6])
     .scale(55000)
-    .translate([width / 3, height / 2]);
+    .translate([width / 2, height / 2]);
 
 var path = d3.geo.path().projection(projection);
 
-d3.json("Budapestteszt.json", function(error, bp) {
+d3.json("Budapestteszt2.json", function(error, bp) {
   if (error) return console.error(error);
   svg.selectAll(".kerulet")
     .data(topojson.feature(bp, bp.objects.Budapestteszt).features)
