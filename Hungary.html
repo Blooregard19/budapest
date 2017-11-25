@@ -63,16 +63,14 @@ console.log(helyseg);
   //         .duration(250)
   //         .attr("fill", "black");
   //});
-  svg.append("path")
-    .datum(helyseg)
-    .attr("d", path)
-    .attr("class", "pont");
-
+  
   svg.selectAll(".varos")
     .data(helyseg)
-  .enter().append("text")
-    .attr("class", "varos")
-    .text(function(d) {return d.helys});
+  .enter().append("circle", ".varos")
+    .attr("r", 3)
+    .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
+    //.attr("class", "varos")
+    //.text(function(d) {return d.helys});
 }
 /* JavaScript goes here. */
 </script>
