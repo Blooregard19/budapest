@@ -64,13 +64,13 @@ console.log(helyseg);
   //         .attr("fill", "black");
   //});
   
-  svg.selectAll(".varos")
+  var hely = svg.selectAll(".varos")
     .data(helyseg)
   .enter().append("circle", ".varos")
     .attr("r", 3)
     .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
-  svg.selectAll(".varos")
-    .append("title")
+  
+  hely.append("title")
     .text(function(d) {return d.helys;});
     //.attr("class", "varos")
     //.text(function(d) {return d.helys});
