@@ -25,10 +25,10 @@ var projection = d3.geo.mercator()
 
 var path = d3.geo.path().projection(projection);
 
-d3.json("Budapestteszt2.json", function(error, bp) {
+d3.json("Hungary.json", function(error, hun) {
   if (error) return console.error(error);
   svg.selectAll(".kerulet")
-    .data(topojson.feature(bp, bp.objects.Budapestteszt).features)
+    .data(topojson.feature(hun, hun.objects.Hungary).features)
     .enter()
     .append("path")
     //.attr("class", function(d) { return "kerulet " + d.properties.region})
