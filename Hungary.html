@@ -69,6 +69,9 @@ console.log(helyseg);
   .enter().append("circle", ".varos")
     .attr("r", 3)
     .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
+  svg.selectAll(".varos")
+    .append("title")
+    .text(function(d) {return d.helys;});
     //.attr("class", "varos")
     //.text(function(d) {return d.helys});
 }
