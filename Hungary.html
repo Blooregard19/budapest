@@ -27,7 +27,7 @@ var path = d3.geo.path().projection(projection);
 
 d3.json("Hungary.json", function(error, hun) {
   if (error) return console.error(error);
-  svg.selectAll(".kerulet")
+  svg.selectAll(".orszag")
     .data(topojson.feature(hun, hun.objects.Hungary).features)
     .enter()
     .append("path")
@@ -43,7 +43,7 @@ d3.json("Hungary.json", function(error, hun) {
   //         .transition()
   //         .duration(250)
   //         .attr("fill", "black");
-  });
+  //});
 });
 /* JavaScript goes here. */
 </script>
