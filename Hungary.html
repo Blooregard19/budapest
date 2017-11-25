@@ -48,7 +48,9 @@ function ready(error, hun, helyseg) {
     .enter()
     .append("path")
     //.attr("class", function(d) { return "kerulet " + d.properties.region})
-    .attr("d", path);
+    .attr("d", path)
+    .attr("fill", "white")
+    .attr("stroke", "black");
     //.on("mouseover", function() {
     //    d3.select(this)
     //        .attr("fill", function(d) {return d.properties.szin});
