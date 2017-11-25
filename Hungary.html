@@ -43,6 +43,7 @@ queue()
 
 function ready(error, hun, helyseg) {
   if (error) throw error;
+console.log(helyseg);
   svg.selectAll(".orszag")
     .data(topojson.feature(hun, hun.objects.Hungary).features)
     .enter()
