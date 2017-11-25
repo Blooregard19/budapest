@@ -6,8 +6,9 @@
 </style>
 
 <body>
-<script src="d3.v3.min.js" charset="utf-8"></script>
+<script src="d3.v4.min.js" charset="utf-8"></script>
 <script src="topojson.v1.min.js"></script>
+<script src="//d3js.org/queue.v1.min.js"></script>
 
 <script>
 
@@ -18,15 +19,30 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var projection = d3.geo.mercator()
+var projection = d3.geoMercator()
     .center([19.5, 47.18])
     .scale(7500)
     .translate([width / 2, height / 2]);
 
-var path = d3.geo.path().projection(projection);
+var path = d3.geoPath().projection(projection);
 
-d3.json("Hungary.json", function(error, hun) {
-  if (error) return console.error(error);
+var ssv = d3.dsvFormat(";");
+
+function hucsv(adat, callback) {
+  d3.request(adat)
+	.mimeType("text/plain")
+	.response(function(xhr) { return ssv.parse(xhr.responseText);})
+      .get(function(data) {callback(null, data);});
+  
+};
+
+queue()
+    .defer(d3.json, "Hungary.json")
+    .defer(hucsv, "helyseg_hu2.csv")
+    .await(ready);
+
+function ready(error, hun, helyseg) {
+  if (error) throw error;
   svg.selectAll(".orszag")
     .data(topojson.feature(hun, hun.objects.Hungary).features)
     .enter()
