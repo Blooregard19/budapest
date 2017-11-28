@@ -19,3 +19,7 @@ https://stackoverflow.com/questions/23828963/display-icons-image-instead-of-circ
 http://techslides.com/d3-maps-with-image-tiles
 http://bl.ocks.org/mbostock/5342063
 https://bl.ocks.org/mbostock/5593150
+
+mapbox megoldások
+https://bl.ocks.org/shimizu/5f4cee0fddc7a64b55a9
+http://bl.ocks.org/feomike/5967885
