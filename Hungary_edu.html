@@ -83,7 +83,8 @@ d3.selectAll("path")
 	.style("opacity", 0)
 x.domain([0, d3.max(helyseg, function(d) { return d.csh_index; })]);
 y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
-
+svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
 svg.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + height + ")")
