@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<style>
+/* CSS goes here. */
+</style>
+
+<body>
+<script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script src="//d3js.org/queue.v1.min.js"></script>
+
+<script>
+var width = 1160,
+    height = 960;
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var projection = d3.geoMercator()
+    .center([19.5, 47.18])
+    .scale(7500)
+    .translate([width / 2, height / 2]);
+var path = d3.geoPath().projection(projection);
+var ssv = d3.dsvFormat(",");
+function hucsv(adat, callback) {
+  d3.request(adat)
+	.mimeType("text/plain")
+	.response(function(xhr) { return ssv.parse(xhr.responseText);})
+      .get(function(data) {callback(null, data);});
+  
+};
+queue()
+    .defer(d3.json, "Hungary.json")
+    .defer(hucsv, "edu_adat.csv")
+    .await(ready);
+function ready(error, hun, helyseg) {
+  if (error) throw error;
+//console.log(helyseg);
+  svg.selectAll(".orszag")
+    .data(topojson.feature(hun, hun.objects.Hungary).features)
+    .enter()
+    .append("path")
+    //.attr("class", function(d) { return "kerulet " + d.properties.region})
+    .attr("d", path)
+    .attr("fill", "white")
+    .attr("stroke", "black");
+    //.on("mouseover", function() {
+    //    d3.select(this)
+    //        .attr("fill", function(d) {return d.properties.szin});
+             /*.attr("fill", "green"); */
+  //})
+  //  .on("mouseout", function() {
+  //      d3.select(this)
+  //         .transition()
+  //         .duration(250)
+  //         .attr("fill", "black");
+  //});
+  
+  var hely = svg.selectAll(".varos")
+    .data(helyseg)
+  .enter().append("circle", ".varos")
+    .attr("r", 3)
+    .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
+  
+  hely.append("title")
+    .text(function(d) {return d.isk;});
+    //.attr("class", "varos")
+    //.text(function(d) {return d.helys});
+}
+/* JavaScript goes here. */
+</script>
