@@ -68,6 +68,7 @@ function ready(error, hun, helyseg) {
     .data(helyseg)
   .enter().append("circle", ".varos")
     .attr("r", 3)
+    .attr("class", "varos")
     .attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";});
   
   hely.append("title")
@@ -82,7 +83,7 @@ d3.selectAll("path")
 	.duration(1000)
 	.style("opacity", 0);
 d3.selectAll("path").remove().exit();
-x.domain([0, d3.max(helyseg, function(d) { return d.csh_index; })]);
+x.domain([d3.min(helyseg, function(d) { return d.csh_index; }), d3.max(helyseg, function(d) { return d.csh_index; })]);
 y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
 //svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
@@ -104,6 +105,7 @@ svg.selectAll(".dot")
 d3.selectAll(".varos")
 	.transition()
 	.duration(500)
+	.attr("transform", "translate(0)")
 	.attr("cx", function(d) {return x(d.csh_index);})
 	.attr("cy", function(d) {return y(d.m_stat);});
 }
