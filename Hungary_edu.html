@@ -18,7 +18,10 @@ var width = 1160,
     height = 960;
 var svg = d3.select("body").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height),
+    margin = {top: 20, right: 20, bottom: 30, left: 140},
+    width = +svg.attr("width") - margin.left - margin.right,
+    height = +svg.attr("height") - margin.top - margin.bottom;;
 var projection = d3.geoMercator()
     .center([19.5, 47.18])
     .scale(7500)
@@ -74,7 +77,7 @@ function ready(error, hun, helyseg) {
 d3.select("#atrendez").on("change", change);
 
 function change() {
-d3.selectAll(".orszag")
+d3.selectAll("path")
 	.transition()
 	.duration(500)
 	.style("opacity", 0)
