@@ -19,7 +19,7 @@ var width = 1160,
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height),
-    margin = {top: 20, right: 20, bottom: 30, left: 140},
+    margin = {top: 20, right: 20, bottom: 30, left: 240},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;;
 var projection = d3.geoMercator()
@@ -79,7 +79,7 @@ d3.select("#atrendez").on("change", change);
 function change() {
 d3.selectAll("path")
 	.transition()
-	.duration(500)
+	.duration(1000)
 	.style("opacity", 0)
 x.domain([0, d3.max(helyseg, function(d) { return d.csh_index; })]);
 y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
