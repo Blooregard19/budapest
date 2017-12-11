@@ -84,7 +84,7 @@ d3.selectAll("path")
 d3.selectAll("path").remove().exit();
 x.domain([0, d3.max(helyseg, function(d) { return d.csh_index; })]);
 y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
-svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 svg.append("g")
       .attr("class", "axis axis--x")
@@ -94,6 +94,13 @@ svg.append("g")
 svg.append("g")
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y));
+svg.selectAll(".dot")
+      .data(helyseg)
+      .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 3.5)
+      .attr("cx", function(d) { return x(d.csh_index); })
+      .attr("cy", function(d) { return y(d.m_stat); });
 d3.selectAll(".varos")
 	.transition()
 	.duration(500)
