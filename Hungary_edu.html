@@ -80,7 +80,8 @@ function change() {
 d3.selectAll("path")
 	.transition()
 	.duration(1000)
-	.style("opacity", 0)
+	.style("opacity", 0);
+d3.selectAll("path").remove().exit();
 x.domain([0, d3.max(helyseg, function(d) { return d.csh_index; })]);
 y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
 svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
