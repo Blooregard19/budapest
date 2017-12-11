@@ -15,7 +15,7 @@
 
 <script>
 var width = 1160,
-    height = 960;
+    height = 660;
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height),
@@ -75,14 +75,23 @@ function ready(error, hun, helyseg) {
     .text(function(d) {return d.isk;});
     //.attr("class", "varos")
     //.text(function(d) {return d.helys});
-d3.select("#atrendez").on("change", change);
+d3.select("#atrendez").on("change", valtoz);
+
+function valtoz() {
+if ((d3.select('input[name="rendez"]').property("checked") == true)) {
+change();
+}
+if ((d3.select('input[name="rendez"]').property("checked") == false)) {
+terkep();
+}
+}
 
 function change() {
 d3.selectAll("path")
 	.transition()
 	.duration(1000)
 	.style("opacity", 0);
-d3.selectAll("path").remove().exit();
+//d3.selectAll("path").remove().exit();
 x.domain([d3.min(helyseg, function(d) { return d.csh_index; }), d3.max(helyseg, function(d) { return d.csh_index; })]);
 y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
 //svg.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -95,19 +104,34 @@ svg.append("g")
 svg.append("g")
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y));
-svg.selectAll(".dot")
-      .data(helyseg)
-      .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 3.5)
-      .attr("cx", function(d) { return x(d.csh_index); })
-      .attr("cy", function(d) { return y(d.m_stat); });
+//svg.selectAll(".dot")
+//      .data(helyseg)
+//      .enter().append("circle")
+//      .attr("class", "dot")
+//      .attr("r", 3.5)
+//      .attr("cx", function(d) { return x(d.csh_index); })
+//      .attr("cy", function(d) { return y(d.m_stat); });
 d3.selectAll(".varos")
 	.transition()
 	.duration(500)
 	.attr("transform", "translate(0)")
 	.attr("cx", function(d) {return x(d.csh_index);})
 	.attr("cy", function(d) {return y(d.m_stat);});
+}
+
+function terkep() {
+d3.selectAll(".axis")
+	.transition()
+	.duration(1000)
+	.style("opacity", 0);
+d3.selectAll(".axis").remove().exit();
+
+d3.selectAll(".varos")
+	.transition()
+	.duration(500)
+	.attr("transform", function(d) {return "translate(" + projection([d.long, d.lat]) + ")";})
+	.attr("cx", 0)
+	.attr("cy", 0);
 }
 
 }
