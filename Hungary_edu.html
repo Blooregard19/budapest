@@ -6,6 +6,9 @@
 </style>
 
 <body>
+<div id = "atrendez">
+<label><input name = "rendez" id = "atrendez" type="checkbox"> Átrendezés</label>
+</div>
 <script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
 <script src="//d3js.org/topojson.v1.min.js"></script>
 <script src="//d3js.org/queue.v1.min.js"></script>
@@ -20,6 +23,8 @@ var projection = d3.geoMercator()
     .center([19.5, 47.18])
     .scale(7500)
     .translate([width / 2, height / 2]);
+var x = d3.scaleLinear().rangeRound([0, width]),
+    y = d3.scaleLinear().rangeRound([0, height]);
 var path = d3.geoPath().projection(projection);
 var ssv = d3.dsvFormat(",");
 function hucsv(adat, callback) {
@@ -66,6 +71,31 @@ function ready(error, hun, helyseg) {
     .text(function(d) {return d.isk;});
     //.attr("class", "varos")
     //.text(function(d) {return d.helys});
+d3.select("#atrendez").on("change", change);
+
+function change() {
+d3.selectAll(".orszag")
+	.transition()
+	.duration(500)
+	.style("opacity", 0)
+x.domain([0, d3.max(helyseg, function(d) { return d.csh_index; })]);
+y.domain([0, d3.max(helyseg, function(d) { return d.m_stat; })]);
+
+svg.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x)); 
+	
+svg.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y));
+d3.selectAll(".varos")
+	.transition()
+	.duration(500)
+	.attr("cx", function(d) {return x(d.csh_index);})
+	.attr("cy", function(d) {return y(d.m_stat);});
+}
+
 }
 /* JavaScript goes here. */
 </script>
